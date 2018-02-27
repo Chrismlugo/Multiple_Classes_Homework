@@ -4,6 +4,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class LibraryTest {
 
@@ -12,33 +13,39 @@ public class LibraryTest {
 
     @Before
     public void before(){
-        ArrayList<Book> books = new ArrayList<>();
-        books.add(book);
-        books.add(book);
-        books.add(book);
-        library = new Library(6,books);
+        library = new Library(6);
+        book = new Book();
     }
 
     @Test
     public void canCountBooks(){
-        assertEquals(3, library.countBooks());
+        assertEquals(0, library.countBooks());
     }
 
     @Test
     public void canAddBookToLibrary(){
-       library.add(book);
-       assertEquals(4, library.countBooks());
+       library.addBook(book);
+       assertEquals(1, library.countBooks());
     }
 
     @Test
     public void addIfUnderCapacity(){
-        library.add(book);
-        library.add(book);
-        library.add(book);
+        library.addBook(book);
+        library.addBook(book);
+        library.addBook(book);
+        library.addBook(book);
+        library.addBook(book);
+        library.addBook(book);
         assertEquals(6, library.countBooks());
-        library.add(book);
+        library.addBook(book);
         assertEquals(6, library.countBooks());
     }
 
-
+    @Test
+    public void canRemoveBook(){
+        library.addBook(book);
+        Book removed =  library.removeBook();
+        assertNotNull(removed);
+        assertEquals(0, library.countBooks());
+    }
 }
