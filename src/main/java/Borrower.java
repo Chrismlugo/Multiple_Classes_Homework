@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 
 public class Borrower {
+    private int libraryCard;
     private ArrayList<Book> collection;
 
-    public Borrower(){
+    public Borrower(int libraryCard){
+        this.libraryCard = libraryCard;
         this.collection = new ArrayList<>();
     }
 
@@ -12,9 +14,12 @@ public class Borrower {
     }
 
 
-    public void takeBook(Library library){
-        Book book = library.removeBook();
-        collection.add(book);
+    public void takeBook(Library library) {
+        if (countCollection() < this.libraryCard) {
+            Book book = library.removeBook();
+            collection.add(book);
+        }
+
     }
 
 

@@ -11,8 +11,8 @@ public class BorrowerTest {
 
     @Before
         public void before(){
-        borrower = new Borrower();
-        library = new Library(6);
+        borrower = new Borrower(5);
+        library = new Library(10);
         book = new Book(GenreType.HORROR);
 
     }
@@ -30,6 +30,24 @@ public class BorrowerTest {
          assertEquals(0, library.countBooks());
          assertEquals(1, borrower.countCollection());
 
+    }
+
+    @Test
+    public void cantBorrowOverLimit(){
+        library.addBook(book);
+        library.addBook(book);
+        library.addBook(book);
+        library.addBook(book);
+        library.addBook(book);
+        library.addBook(book);
+        borrower.takeBook(library);
+        borrower.takeBook(library);
+        borrower.takeBook(library);
+        borrower.takeBook(library);
+        borrower.takeBook(library);
+        assertEquals(5, borrower.countCollection());
+        borrower.takeBook(library);
+        assertEquals(5, borrower.countCollection());
     }
 
 
