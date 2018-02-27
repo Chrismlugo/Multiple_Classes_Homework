@@ -14,7 +14,7 @@ public class LibraryTest {
     @Before
     public void before(){
         library = new Library(6);
-        book = new Book();
+        book = new Book(GenreType.CRIME);
     }
 
     @Test
